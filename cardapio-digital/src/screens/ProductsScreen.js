@@ -19,13 +19,17 @@ export default function ProductsScreen() {
   const [query, setQuery] = useState('');
 
   const q = query.trim().toLowerCase();
+
+  console.log(items)
+  
   const filteredItems = !q
     ? items
-    : items.filter((p) =>
-        (`${p.name || ''} ${p.sku || ''} ${p.description || ''}`)
-          .toLowerCase()
-          .includes(q)
-      );
+    : items.filter((p) => {
+        const idStr = String(p.id || '');
+        const haystack = `${idStr} ${p.name || ''} ${p.sku || ''} ${p.description || ''}`
+          .toLowerCase();
+        return haystack.includes(q);
+      });
 
   // Carregamento inicial
   if (loading && items.length === 0) {
@@ -65,7 +69,7 @@ export default function ProductsScreen() {
         <Text style={styles.title}>Produtos</Text>
         <TextInput
           style={styles.searchInput}
-          placeholder="Buscar por nome, SKU ou descrição"
+          placeholder="Buscar por ID, nome, SKU ou descrição"
           value={query}
           onChangeText={setQuery}
           returnKeyType="search"

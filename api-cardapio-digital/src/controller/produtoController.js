@@ -42,13 +42,11 @@ export const createProduct = async (req, res) => {
   }
 
   const products = await dataService.readAll();
-  const id = Number(req.body.id);
+
+  const id = products.length === 0 ? 1 : Math.max(...products.map(p => Number(p.id) || 0)) + 1;
   const skuNorm = normalizeSku(req.body.sku);
 
-  // Regras de negócio
-  if (products.some((p) => p.id === id)) {
-    return res.status(409).json({ success: false, message: 'Já existe produto com este ID.' });
-  }
+
   if (products.some((p) => normalizeSku(p.sku) === skuNorm)) {
     return res.status(409).json({ success: false, message: 'Já existe produto com este SKU.' });
   }
@@ -66,7 +64,7 @@ export const createProduct = async (req, res) => {
 
   return res.status(201).json({
     success: true,
-    message: 'Produto criado com sucesso.',
+    message: 'Produto criado com sucesso (ID gerado automaticamente).',
     data: newProduct,
   });
 };

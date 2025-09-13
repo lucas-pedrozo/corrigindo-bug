@@ -5,17 +5,17 @@ export const isPositiveInt = (value) =>
     String(sku || '').trim().toUpperCase();
   
   export const validateNewProductPayload = (body) => {
-    const errors = [];
-  
-    if (body.id === undefined) errors.push('id é obrigatório (inteiro > 0).');
-    if (!isPositiveInt(Number(body.id))) errors.push('id deve ser inteiro positivo.');
-  
-    if (!body.name || String(body.name).trim().length === 0) errors.push('name é obrigatório.');
-    if (body.price === undefined || isNaN(Number(body.price))) errors.push('price é obrigatório e deve ser numérico.');
-    if (!body.sku || String(body.sku).trim().length === 0) errors.push('sku é obrigatório.');
-  
-    return errors;
-  };
+      const errors = [];
+
+      // Agora o id é gerado automaticamente; rejeitar se o cliente enviar para evitar conflitos
+      if (body.id !== undefined) errors.push('id não deve ser enviado; é gerado automaticamente.');
+
+      if (!body.name || String(body.name).trim().length === 0) errors.push('name é obrigatório.');
+      if (body.price === undefined || isNaN(Number(body.price))) errors.push('price é obrigatório e deve ser numérico.');
+      if (!body.sku || String(body.sku).trim().length === 0) errors.push('sku é obrigatório.');
+
+      return errors;
+    };
   
   export const validateUpdateProductPayload = (body) => {
     const errors = [];

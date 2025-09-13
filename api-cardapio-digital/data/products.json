@@ -1,1 +1,72 @@
-[]
+[
+	{
+		"id": 1,
+		"name": "Caipirinha de Limão",
+		"price": 18.5,
+		"sku": "CAIPIRINHA-LIMAO",
+		"description": "Clássica caipirinha brasileira com cachaça artesanal, limão fresco e açúcar."
+	},
+	{
+		"id": 2,
+		"name": "Coxinha de Frango",
+		"price": 8.0,
+		"sku": "COXINHA-FRANGO",
+		"description": "Coxinha recheada com frango desfiado temperado e catupiry cremoso."
+	},
+	{
+		"id": 3,
+		"name": "Picanha na Chapa",
+		"price": 72.9,
+		"sku": "PICANHA-CHAPA",
+		"description": "Picanha premium fatiada na chapa com alho, manteiga de ervas e acompanhamentos."
+	},
+	{
+		"id": 4,
+		"name": "Torta de Limão",
+		"price": 16.0,
+		"sku": "TORTA-LIMAO",
+		"description": "Torta de limão com base crocante e merengue maçaricado."
+	},
+	{
+		"id": 5,
+		"name": "Pastel de Queijo",
+		"price": 9.5,
+		"sku": "PASTEL-QUEIJO",
+		"description": "Pastel crocante recheado com queijo mussarela derretido."
+	},
+	{
+		"id": 6,
+		"name": "Brigadeiro Gourmet",
+		"price": 4.5,
+		"sku": "BRIGADEIRO-GOURMET",
+		"description": "Brigadeiro artesanal feito com chocolate belga e finalizado com granulado belga."
+	},
+	{
+		"id": 7,
+		"name": "Suco Natural de Maracujá",
+		"price": 12.0,
+		"sku": "SUCO-MARACUJA",
+		"description": "Suco 100% natural de maracujá servido gelado sem adição de conservantes."
+	},
+	{
+		"id": 8,
+		"name": "Hambúrguer Artesanal",
+		"price": 32.0,
+		"sku": "HAMBURGUER-ARTESANAL",
+		"description": "Hambúrguer artesanal 180g, queijo, alface, tomate, cebola caramelizada e molho da casa."
+	},
+	{
+		"id": 9,
+		"name": "Esfiha de Carne",
+		"price": 7.0,
+		"sku": "ESFIHA-CARNE",
+		"description": "Esfiha aberta de carne temperada com toque de limão e especiarias árabes."
+	},
+	{
+		"id": 10,
+		"name": "Café Espresso",
+		"price": 6.0,
+		"sku": "CAFE-ESPRESSO",
+		"description": "Espresso curto, extraído em 25 segundos com torra média especial."
+	}
+]

@@ -1,5 +1,5 @@
 // src/screens/ProductsScreen.js
-import React from 'react';
+import React, { useState } from 'react';
 import {
   SafeAreaView,
   View,
@@ -9,12 +9,23 @@ import {
   RefreshControl,
   StyleSheet,
   Button,
+  TextInput,
 } from 'react-native';
 import { useProducts } from '../hooks/useProducts';
 import ProductCard from '../components/ProductCard';
 
 export default function ProductsScreen() {
   const { items, loading, error, reload } = useProducts();
+  const [query, setQuery] = useState('');
+
+  const q = query.trim().toLowerCase();
+  const filteredItems = !q
+    ? items
+    : items.filter((p) =>
+        (`${p.name || ''} ${p.sku || ''} ${p.description || ''}`)
+          .toLowerCase()
+          .includes(q)
+      );
 
   // Carregamento inicial
   if (loading && items.length === 0) {
@@ -49,13 +60,21 @@ export default function ProductsScreen() {
 
   // Lista de produtos
   return (
-    <SafeAreaView style={styles.container}>
+  <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>Produtos</Text>
+        <TextInput
+          style={styles.searchInput}
+          placeholder="Buscar por nome, SKU ou descrição"
+          value={query}
+          onChangeText={setQuery}
+          returnKeyType="search"
+          autoCorrect={false}
+          clearButtonMode="while-editing"
+        />
         <Button title="Recarregar" onPress={reload} />
       </View>
 
-      {/* Se houver erro durante um refresh, mas já temos dados, mostra um aviso */}
       {!!error && items.length > 0 && (
         <View style={styles.bannerError}>
           <Text style={styles.bannerErrorText}>{error}</Text>
@@ -63,15 +82,19 @@ export default function ProductsScreen() {
       )}
 
       <FlatList
-        data={items}
+        data={filteredItems}
         keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => <ProductCard product={item} />}
         contentContainerStyle={
-          items.length === 0 ? styles.listEmpty : styles.list
+          filteredItems.length === 0 ? styles.listEmpty : styles.list
         }
         ListEmptyComponent={
           <View style={{ alignItems: 'center', padding: 24 }}>
-            <Text>Nenhum produto cadastrado.</Text>
+            {query.trim() ? (
+              <Text>Nenhum produto encontrado para "{query}".</Text>
+            ) : (
+              <Text>Nenhum produto cadastrado.</Text>
+            )}
           </View>
         }
         refreshControl={
@@ -117,4 +140,6 @@ const styles = StyleSheet.create({
     borderColor: '#ffcccc',
   },
   bannerErrorText: { color: '#b30000', fontSize: 12 },
+  searchInput: { flex: 1, marginHorizontal: 8, paddingHorizontal: 8, borderWidth: 1, borderColor: '#ccc', borderRadius: 4, height: 36
+  },
 });
